@@ -1,7 +1,7 @@
 package gee
 
 import (
-	"log"
+	// "log"
 	"net/http"
 	"strings"
 )
@@ -9,7 +9,10 @@ import (
 type router struct {
 	// GET/POST hold a Trie respectively
 	// Key is method-pattern, e.g. "GET-/hello/:name"
-	roots    map[string]*node
+	// Value is the trie node
+	roots map[string]*node
+	// Key is method-pattern, e.g. "GET-/hello/:name"
+	// Value is the handler function for that pattern
 	handlers map[string]HandlerFunc
 }
 
@@ -37,7 +40,7 @@ func parsePattern(pattern string) []string {
 }
 
 func (r *router) addRoute(method string, pattern string, handler HandlerFunc) {
-	log.Printf("Router %4s - %s", method, pattern)
+	// log.Printf("Router addRoute %4s - %s", method, pattern)
 	parts := parsePattern(pattern)
 
 	key := method + "-" + pattern
