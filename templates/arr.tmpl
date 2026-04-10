@@ -1,0 +1,15 @@
+<html>
+<head>
+    <link rel="stylesheet" href="/assets/css/geektutu.css">
+</head>
+<body>
+    <h1>{{.title}} Student List</h1>
+    {{range .stuArr}}
+        <div class="stu-card">
+            <p>Name: {{.Name}}</p>
+            <p>Age: {{.Age}}</p>
+        </div>
+    {{end}}
+    <a href="/date">View Date Demo</a>
+</body>
+</html>

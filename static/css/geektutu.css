@@ -1,0 +1,23 @@
+/* static/css/geektutu.css */
+body {
+    background-color: #f4f4f9;
+    font-family: Arial, sans-serif;
+    margin: 40px;
+}
+
+h1 {
+    color: #333;
+}
+
+.stu-card {
+    background: white;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.date-text {
+    color: darkblue;
+    font-weight: bold;
+}
