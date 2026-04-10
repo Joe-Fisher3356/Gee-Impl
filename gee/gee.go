@@ -3,6 +3,7 @@ package gee
 import (
 	"log"
 	"net/http"
+	"strings"
 )
 
 // Define a function type
@@ -61,6 +62,20 @@ func (e *Engine) Run(addr string) (err error) {
 }
 
 func (e *Engine) ServeHTTP(w http.ResponseWriter, req *http.Request) {
-	c := newContext(&w, req)
+	var middlewares []HandlerFunc
+	for _, group := range e.groups {
+		if strings.HasPrefix(req.URL.Path, group.prefix) {
+			middlewares = append(middlewares, group.middlewares...)
+		}
+	}
+	// For each request, create a new context
+	c := newContext(w, req)
+	// For each request , collect middlewares and assign to c.handlers
+	// In handle(), add handlers into c.handlers.
+	c.handlers = middlewares
 	e.router.handle(c)
+}
+
+func (group *RouterGroup) Use(middlewares ...HandlerFunc) {
+	group.middlewares = append(group.middlewares, middlewares...)
 }
